@@ -2,11 +2,13 @@ package com.lespsan543.apppeliculas.model
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 /**
  * Define la API y las consultas que se le van a realizar
  * Recoge los datos y los convierte al modelo de datos establecido
  */
+@Singleton
 class APIService {
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://www.omdbapi.com/?")

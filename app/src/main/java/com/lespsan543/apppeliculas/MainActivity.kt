@@ -7,10 +7,12 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.lespsan543.apppeliculas.navigation.Routes
+import com.lespsan543.apppeliculas.screens.MoviesScreen
 import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
 import com.lespsan543.apppeliculas.viewModel.MoviesViewModel
 import com.lespsan543.apppeliculas.viewModel.ProfileViewModel
@@ -32,7 +34,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = Routes.MoviesScreen.route) {
+                        composable(Routes.MoviesScreen.route) {
+                            MoviesScreen(navController, moviesViewModel)
+                        }
 
+                    }
                 }
             }
         }
