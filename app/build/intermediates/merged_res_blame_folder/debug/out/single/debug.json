@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_lupa11w.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_lupa11w.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_perfil2w.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_perfil2w.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_home_b.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_home_b.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_lupa_b2.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_lupa_b2.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/xml_backup_rules.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_home_w1.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_home_w1.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_lupa2w.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_lupa2w.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/xml_data_extraction_rules.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_perfil_b.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_perfil_b.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_lupa_b1.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_lupa_b1.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_lupa1w.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_lupa1w.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_lupa22w.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_lupa22w.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_home_w2.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_home_w2.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/drawable-nodpi_menu_perfil_w.xml.flat",
+        "source": "com.lespsan543.apppeliculas.app-relay-56:/drawable-nodpi/menu_perfil_w.xml"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "com.lespsan543.apppeliculas.app-merged_res-60:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "com.lespsan543.apppeliculas.app-main-62:/mipmap-xxxhdpi/ic_launcher.webp"
+    }
+]

@@ -1,7 +1,6 @@
 package com.lespsan543.apppeliculas.peliculas.ui
 
 import android.annotation.SuppressLint
-import android.os.Debug
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize

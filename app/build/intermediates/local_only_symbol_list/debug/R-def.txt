@@ -1,0 +1,29 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+drawable menu_home_b
+drawable menu_home_w1
+drawable menu_home_w2
+drawable menu_lupa11w
+drawable menu_lupa1w
+drawable menu_lupa22w
+drawable menu_lupa2w
+drawable menu_lupa_b1
+drawable menu_lupa_b2
+drawable menu_perfil2w
+drawable menu_perfil_b
+drawable menu_perfil_w
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Theme.AppPeliculas
+xml backup_rules
+xml data_extraction_rules
