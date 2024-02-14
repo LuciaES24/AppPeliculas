@@ -1,5 +1,6 @@
-package com.lespsan543.apppeliculas.model
+package com.lespsan543.apppeliculas.peliculas.data
 
+import com.lespsan543.apppeliculas.peliculas.data.model.SearchModel
 import retrofit2.http.GET
 import retrofit2.http.Url
 

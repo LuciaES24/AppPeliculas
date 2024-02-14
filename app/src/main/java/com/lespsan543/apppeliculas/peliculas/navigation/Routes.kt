@@ -1,4 +1,4 @@
-package com.lespsan543.apppeliculas.navigation
+package com.lespsan543.apppeliculas.peliculas.navigation
 
 /**
  * Gestiona las diferentes rutas que componen la navegación de la aplicación

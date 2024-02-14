@@ -1,4 +1,4 @@
-package com.lespsan543.apppeliculas.viewModel
+package com.lespsan543.apppeliculas.peliculas.ui.viewModel
 
 import androidx.lifecycle.ViewModel
 

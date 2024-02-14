@@ -11,13 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.lespsan543.apppeliculas.navigation.Routes
-import com.lespsan543.apppeliculas.screens.MoviesScreen
+import com.lespsan543.apppeliculas.peliculas.navigation.Routes
+import com.lespsan543.apppeliculas.peliculas.ui.MoviesScreen
 import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
-import com.lespsan543.apppeliculas.viewModel.MoviesViewModel
-import com.lespsan543.apppeliculas.viewModel.ProfileViewModel
-import com.lespsan543.apppeliculas.viewModel.SearchViewModel
-import com.lespsan543.apppeliculas.viewModel.SeriesViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.ProfileViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SearchViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SeriesViewModel
 
 class MainActivity : ComponentActivity() {
     private val moviesViewModel : MoviesViewModel by viewModels()
