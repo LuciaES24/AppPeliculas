@@ -13,15 +13,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.MoviesScreen
+import com.lespsan543.apppeliculas.peliculas.ui.SeriesScreen
 import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.ProfileViewModel
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SearchViewModel
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SeriesViewModel
 
 class MainActivity : ComponentActivity() {
-    private val moviesViewModel : MoviesViewModel by viewModels()
-    private val seriesViewModel : SeriesViewModel by viewModels()
+    private val moviesOrSeriesViewModel : MoviesOrSeriesViewModel by viewModels()
     private val profileViewModel : ProfileViewModel by viewModels()
     private val searchViewModel : SearchViewModel by viewModels()
 
@@ -37,7 +36,10 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(navController = navController, startDestination = Routes.MoviesScreen.route) {
                         composable(Routes.MoviesScreen.route) {
-                            MoviesScreen(navController, moviesViewModel)
+                            MoviesScreen(navController, moviesOrSeriesViewModel)
+                        }
+                        composable(Routes.SeriesScreen.route) {
+                            SeriesScreen(navController, moviesOrSeriesViewModel)
                         }
 
                     }

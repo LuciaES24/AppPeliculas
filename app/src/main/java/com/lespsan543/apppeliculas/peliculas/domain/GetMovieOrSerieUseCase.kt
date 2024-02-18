@@ -5,8 +5,8 @@ import com.lespsan543.apppeliculas.peliculas.ui.states.MovieState
 
 class GetMovieOrSerieUseCase {
     private val appRepository = AppRepository()
-    suspend operator fun invoke(movieOrSerie:String, position:Int) : MovieState {
-        val search = appRepository.getSearchState(movieOrSerie)
+    suspend operator fun invoke(movieOrSerie:String, position:Int, tipo:String) : MovieState {
+        val search = appRepository.getSearchState(movieOrSerie, tipo)
         return appRepository.getMovieState(search, position)
     }
 }

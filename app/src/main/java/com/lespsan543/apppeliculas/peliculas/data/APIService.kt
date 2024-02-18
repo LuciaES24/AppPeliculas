@@ -1,5 +1,6 @@
 package com.lespsan543.apppeliculas.peliculas.data
 
+import retrofit2.Response
 import com.lespsan543.apppeliculas.peliculas.data.model.SearchModel
 import com.lespsan543.apppeliculas.peliculas.data.util.Constants.API_KEY
 import com.lespsan543.apppeliculas.peliculas.data.util.Constants.BASE_URL
@@ -22,9 +23,9 @@ class APIService {
      * @param pelicula nombre o palabra para buscar películas que la incluyen
      * @return objeto SearchModel con la información recogida de la API
      */
-    suspend fun getMoviesData(pelicula:String) : SearchModel {
-        return retrofit.create(RetrofitAPI::class.java).getData(retrofit.baseUrl().toString()+
-                                                                        "?s=$pelicula&type=movie&$API_KEY")
+    suspend fun getMoviesData(pelicula:String) : Response<SearchModel> {
+        return retrofit.create(RetrofitAPI::class.java).getData(BASE_URL+
+                                                                    "?s=$pelicula&type=movie&$API_KEY")
     }
 
     /**
@@ -33,9 +34,9 @@ class APIService {
      * @param serie nombre o palabra para buscar series que la incluyen
      * @return objeto SearchModel con la información recogida de la API
      */
-    suspend fun getSeriesData(serie:String) : SearchModel {
-        return retrofit.create(RetrofitAPI::class.java).getData(retrofit.baseUrl().toString()+
-                "?s=$serie&type=series&$API_KEY")
+    suspend fun getSeriesData(serie:String) : Response<SearchModel> {
+        return retrofit.create(RetrofitAPI::class.java).getData(BASE_URL+
+                                                                    "?s=$serie&type=series&$API_KEY")
     }
 
     /**
@@ -44,8 +45,8 @@ class APIService {
      * @param nombre nombre de la película o serie que se quiere buscar
      * @return objeto SearchModel con la información recogida de la API
      */
-    suspend fun getMoviesOrSeries(nombre:String) : SearchModel {
-        return retrofit.create(RetrofitAPI::class.java).getData(retrofit.baseUrl().toString()+
-                "?s=$nombre&$API_KEY")
+    suspend fun getMoviesOrSeries(nombre:String) : Response<SearchModel> {
+        return retrofit.create(RetrofitAPI::class.java).getData(BASE_URL+
+                                                                    "?s=$nombre&$API_KEY")
     }
 }

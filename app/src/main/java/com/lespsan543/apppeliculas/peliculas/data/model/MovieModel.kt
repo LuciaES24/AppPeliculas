@@ -16,4 +16,8 @@ data class MovieModel (
     var type : String,
     @SerializedName("Poster")
     var poster : String
-)
+){
+    override fun toString(): String {
+        return "MovieModel(title='$title', year='$year', imdbID='$imdbID', type='$type', poster='$poster')"
+    }
+}

@@ -1,4 +1,4 @@
-#Wed Feb 14 20:43:58 CET 2024
+#Sun Feb 18 13:56:33 CET 2024
 base.0=C\:\\Users\\lucia\\Desktop\\ReposGit\\AppPeliculas\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=C\:\\Users\\lucia\\Desktop\\ReposGit\\AppPeliculas\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
 base.10=C\:\\Users\\lucia\\Desktop\\ReposGit\\AppPeliculas\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex

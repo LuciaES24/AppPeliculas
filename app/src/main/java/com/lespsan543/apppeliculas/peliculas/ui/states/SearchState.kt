@@ -1,9 +1,10 @@
 package com.lespsan543.apppeliculas.peliculas.ui.states
 
-import com.lespsan543.apppeliculas.peliculas.data.model.MovieModel
+import kotlinx.coroutines.flow.MutableStateFlow
+
 
 class SearchState(
-    var search : List<MovieModel> = emptyList(),
+    var search : List<MovieState> = emptyList(),
     var totalResults : Int = 0,
     var response : String = ""
 )
