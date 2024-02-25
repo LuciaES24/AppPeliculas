@@ -1,0 +1,182 @@
+{
+  "name": "cabecera",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "AFdA8RFxJr5tJTbLkkKJfi",
+    "node": "23:336",
+    "version": "5220280012",
+    "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
+  },
+  "default": "Property 1=Perfil",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "text",
+        "id": "Favoritos"
+      },
+      {
+        "type": "vector",
+        "id": "Vector"
+      },
+      {
+        "type": "text",
+        "id": "Buscar"
+      }
+    ],
+    "modes": {
+      "Property 1=Perfil": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "126.0",
+              "top": "14.0",
+              "right": "15.0",
+              "bottom": "14.0"
+            },
+            "arrangement": "row",
+            "main-axis-align": "start",
+            "cross-axis-align": "start",
+            "children": [
+              "Favoritos",
+              "Vector"
+            ],
+            "item-spacing": "75.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "Favoritos",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "115.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "19.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Favoritos",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          },
+          {
+            "id": "Vector",
+            "tap-handler": "$ajustes",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "27.99957275390625"
+              }
+            },
+            "vector-content": "vector.svg"
+          }
+        ]
+      },
+      "Property 1=BuscarPeli": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": "false",
+            "children": [
+              "Buscar"
+            ],
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "Buscar",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": "0.0"
+              },
+              "vertical": {
+                "attachment": "center",
+                "offset": "-1.0"
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "88.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "30.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Buscar",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "ajustes": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Property 1=Perfil",
+      "size": {
+        "width": 360.0,
+        "height": 56.0
+      }
+    },
+    {
+      "design": "Property 1=BuscarPeli",
+      "size": {
+        "width": 360.0,
+        "height": 56.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

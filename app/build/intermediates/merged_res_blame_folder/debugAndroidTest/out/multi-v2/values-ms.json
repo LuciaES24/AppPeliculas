@@ -4,7 +4,7 @@
             "outputFile": "com.lespsan543.apppeliculas.test.app-mergeDebugAndroidTestResources-32:/values-ms/values-ms.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\5d5f90d684b11056db68460943bee0cc\\transformed\\core-1.12.0\\res\\values-ms\\values-ms.xml",
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\3e8bc3bc2b6e5294a477d6f195e5b3b1\\transformed\\core-1.12.0\\res\\values-ms\\values-ms.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\bea390e904cba1b4df1bc0736a499eeb\\transformed\\ui-release\\res\\values-ms\\values-ms.xml",
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\92030b8c51f6aa4147b2b89cee25ea81\\transformed\\ui-release\\res\\values-ms\\values-ms.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",

@@ -8,5 +8,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">AppPeliculas</string>
+    <string name="gcm_defaultSenderId" translatable="false">57763419473</string>
+    <string name="google_api_key" translatable="false">AIzaSyDyZAJtKeC4JISMYzo9LYaQLj02oss0GRw</string>
+    <string name="google_app_id" translatable="false">1:57763419473:android:b18cf83e3e5356898aaf70</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDyZAJtKeC4JISMYzo9LYaQLj02oss0GRw</string>
+    <string name="google_storage_bucket" translatable="false">visionplay-6d257.appspot.com</string>
+    <string name="project_id" translatable="false">visionplay-6d257</string>
     <style name="Theme.AppPeliculas" parent="android:Theme.Material.Light.NoActionBar"/>
 </resources>

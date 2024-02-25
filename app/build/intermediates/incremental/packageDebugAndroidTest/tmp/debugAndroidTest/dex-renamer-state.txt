@@ -1,4 +1,4 @@
-#Mon Feb 12 20:29:03 CET 2024
+#Mon Feb 19 15:48:41 CET 2024
 base.0=C\:\\Users\\lucia\\Desktop\\ReposGit\\AppPeliculas\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
 base.1=C\:\\Users\\lucia\\Desktop\\ReposGit\\AppPeliculas\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
 base.2=C\:\\Users\\lucia\\Desktop\\ReposGit\\AppPeliculas\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\13\\classes.dex

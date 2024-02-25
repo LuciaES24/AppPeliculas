@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.lespsan543.apppeliculas.app-mergeDebugResources-58:/values-ml/values-ml.xml",
+            "outputFile": "com.lespsan543.apppeliculas.app-mergeDebugResources-59:/values-ml/values-ml.xml",
             "map": [
                 {
                     "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\459274ba49d1c23104708921192aa6bc\\transformed\\play-services-base-18.0.1\\res\\values-ml\\values.xml",

@@ -7,7 +7,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
@@ -29,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.lespsan543.apppeliculas.guardar.Guardar
 import com.lespsan543.apppeliculas.menu.Menu
 import com.lespsan543.apppeliculas.menu.Property1
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
@@ -52,14 +55,15 @@ fun ShowSeries(
 ) {
     val seriePosition by moviesOrSeriesViewModel.seriePosition.collectAsState()
     val serieList by moviesOrSeriesViewModel.serieList.collectAsState()
+    val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
     BoxWithConstraints {
         val width = maxWidth
         val height = maxHeight
         Scaffold(
-            bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.10f)),
+            bottomBar = { Menu(modifier = Modifier.height(maxHeight.times(0.08f)),
                 property1 = Property1.Inicio,
                 home = { navController.navigate(Routes.MoviesScreen.route) },
-                profile = { navController.navigate(Routes.ProfileScreen.route) },
+                fav1 = { navController.navigate(Routes.ProfileScreen.route) },
                 search = { navController.navigate(Routes.SearchScreen.route) }) },
             floatingActionButton = {
                 Row {
@@ -67,7 +71,7 @@ fun ShowSeries(
                         modifier = Modifier
                             .width(width.times(0.25f))
                             .height(height.times(0.05f)),
-                        containerColor = Color(40,40,40),
+                        containerColor = Color(85,85,85),
                         shape = RectangleShape
                     ) {
                         Text(text = "Películas", color = Color.White, fontSize = 16.sp)
@@ -77,7 +81,7 @@ fun ShowSeries(
                         modifier = Modifier
                             .width(width.times(0.25f))
                             .height(height.times(0.05f)),
-                        containerColor = Color(85,85,85),
+                        containerColor = Color(40,40,40),
                         shape = RectangleShape
                     ) {
                         Text(text = "Series", color = Color.White, fontSize = 16.sp)
@@ -87,29 +91,42 @@ fun ShowSeries(
         ) {
             if (serieList.isNotEmpty()){
                 //Aparece si la información de la API ya ha sido cargada
+                Column(horizontalAlignment = Alignment.End,
+                    modifier = Modifier.fillMaxSize()) {
+                    ExtendedFloatingActionButton(
+                        onClick = { moviesOrSeriesViewModel.newSeries() },
+                        modifier = Modifier
+                            .fillMaxHeight()
+                            .width(width * 0.5f),
+                        containerColor = Color.Transparent
+                    ) {
+                        Icon(imageVector = Icons.Filled.ArrowForward, contentDescription = null)
+                    }
+                }
                 AsyncImage(model = serieList[seriePosition].poster,
-                    contentDescription = "Poster película",
+                    contentDescription = "Poster serie",
                     modifier = Modifier
                         .height(height)
                         .width(width)
                 )
-                ExtendedFloatingActionButton(onClick = { moviesOrSeriesViewModel.newSeries()},
+                Guardar(
                     modifier = Modifier
-                        .fillMaxHeight()
-                        .width(width * 0.5f),
-                    containerColor = Color.Transparent
-                ) {
-                    Icon(imageVector = Icons.Filled.ArrowForward, contentDescription = null)
-                }
+                        .padding(start = width*0.10f, top = height*0.85f),
+                    property1 = property,
+                    guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(serieList[seriePosition]) },
+                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie(serieList[seriePosition].imdbID) }
+                )
             }else{
                 //Aparece si aún no ha cargado la información de la API
                 Column(
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally) {
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()) {
                     CircularProgressIndicator(
                         modifier = Modifier
                             .height(height * 0.5f)
-                            .width(width * 0.5f),)
+                            .width(width * 0.5f)
+                    )
                 }
             }
         }

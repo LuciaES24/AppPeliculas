@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "15:21",
-    "version": "5139733525",
+    "version": "5198867361",
     "component-id": "79f497b890a2416aee3977b1eaff7d93a15d8fe8"
   },
   "default": "Property 1=Inicio",
@@ -26,7 +26,7 @@
       },
       {
         "type": "vector",
-        "id": "perfilW"
+        "id": "favW1"
       },
       {
         "type": "vector",
@@ -46,7 +46,7 @@
       },
       {
         "type": "vector",
-        "id": "perfil2W"
+        "id": "favW2"
       },
       {
         "type": "vector",
@@ -66,7 +66,7 @@
       },
       {
         "type": "vector",
-        "id": "perfilB"
+        "id": "favB"
       },
       {
         "type": "vector",
@@ -92,7 +92,7 @@
             "children": [
               "homeB",
               "lupaW2",
-              "perfilW"
+              "favW1"
             ],
             "item-spacing": "100.0",
             "background-color": {
@@ -138,8 +138,8 @@
             "clip-content": "false"
           },
           {
-            "id": "perfilW",
-            "tap-handler": "$profile",
+            "id": "favW1",
+            "tap-handler": "$fav1",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
@@ -150,7 +150,7 @@
                 "value": "28.0"
               }
             },
-            "vector-content": "perfil_w.svg"
+            "vector-content": "fav_w1.svg"
           },
           {
             "id": "lupa22W",
@@ -204,7 +204,7 @@
             "children": [
               "homeW2",
               "lupaB",
-              "perfil2W"
+              "favW2"
             ],
             "item-spacing": "100.0",
             "background-color": {
@@ -250,8 +250,8 @@
             "clip-content": "false"
           },
           {
-            "id": "perfil2W",
-            "tap-handler": "$profile2",
+            "id": "favW2",
+            "tap-handler": "$fav2",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
@@ -262,7 +262,7 @@
                 "value": "28.0"
               }
             },
-            "vector-content": "perfil2w.svg"
+            "vector-content": "fav_w2.svg"
           },
           {
             "id": "lupaB2",
@@ -316,7 +316,7 @@
             "children": [
               "homeW1",
               "lupaW1",
-              "perfilB"
+              "favB"
             ],
             "item-spacing": "100.0",
             "background-color": {
@@ -362,8 +362,8 @@
             "clip-content": "false"
           },
           {
-            "id": "perfilB",
-            "tap-handler": "$profile3",
+            "id": "favB",
+            "tap-handler": "$fav3",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
@@ -374,7 +374,7 @@
                 "value": "28.0"
               }
             },
-            "vector-content": "perfil_b.svg"
+            "vector-content": "fav_b.svg"
           },
           {
             "id": "lupa11W",
@@ -427,7 +427,7 @@
       "required": false,
       "description": ""
     },
-    "profile": {
+    "fav1": {
       "data-type": "void-callback",
       "required": false,
       "description": ""
@@ -442,7 +442,7 @@
       "required": false,
       "description": ""
     },
-    "profile2": {
+    "fav2": {
       "data-type": "void-callback",
       "required": false,
       "description": ""
@@ -457,7 +457,7 @@
       "required": false,
       "description": ""
     },
-    "profile3": {
+    "fav3": {
       "data-type": "void-callback",
       "required": false,
       "description": ""

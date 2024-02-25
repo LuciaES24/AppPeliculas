@@ -37,13 +37,13 @@ fun Menu(
     property1: Property1 = Property1.Inicio,
     home: () -> Unit = {},
     search: () -> Unit = {},
-    profile: () -> Unit = {},
+    fav1: () -> Unit = {},
     home2: () -> Unit = {},
     search2: () -> Unit = {},
-    profile2: () -> Unit = {},
+    fav2: () -> Unit = {},
     home3: () -> Unit = {},
     search3: () -> Unit = {},
-    profile3: () -> Unit = {}
+    fav3: () -> Unit = {}
 ) {
     when (property1) {
         Property1.Inicio -> TopLevelProperty1Inicio(modifier = modifier) {
@@ -52,7 +52,7 @@ fun Menu(
                 Lupa22WProperty1Inicio(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
                 Lupa2WProperty1Inicio(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
             }
-            PerfilWProperty1Inicio(profile = profile)
+            FavW1Property1Inicio(fav1 = fav1)
         }
         Property1.Buscar -> TopLevelProperty1Buscar(modifier = modifier) {
             HomeW2Property1Buscar(home2 = home2)
@@ -60,7 +60,7 @@ fun Menu(
                 LupaB2Property1Buscar(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
                 LupaB1Property1Buscar(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
             }
-            Perfil2WProperty1Buscar(profile2 = profile2)
+            FavW2Property1Buscar(fav2 = fav2)
         }
         Property1.Perfil -> TopLevelProperty1Perfil(modifier = modifier) {
             HomeW1Property1Perfil(home3 = home3)
@@ -68,7 +68,7 @@ fun Menu(
                 Lupa11WProperty1Perfil(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
                 Lupa1WProperty1Perfil(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
             }
-            PerfilBProperty1Perfil(profile3 = profile3)
+            FavBProperty1Perfil(fav3 = fav3)
         }
     }
 }
@@ -81,13 +81,13 @@ private fun MenuProperty1InicioPreview() {
             Menu(
                 home = {},
                 search = {},
-                profile = {},
+                fav1 = {},
                 home2 = {},
                 search2 = {},
-                profile2 = {},
+                fav2 = {},
                 home3 = {},
                 search3 = {},
-                profile3 = {},
+                fav3 = {},
                 property1 = Property1.Inicio,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -103,13 +103,13 @@ private fun MenuProperty1BuscarPreview() {
             Menu(
                 home = {},
                 search = {},
-                profile = {},
+                fav1 = {},
                 home2 = {},
                 search2 = {},
-                profile2 = {},
+                fav2 = {},
                 home3 = {},
                 search3 = {},
-                profile3 = {},
+                fav3 = {},
                 property1 = Property1.Buscar,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -125,13 +125,13 @@ private fun MenuProperty1PerfilPreview() {
             Menu(
                 home = {},
                 search = {},
-                profile = {},
+                fav1 = {},
                 home2 = {},
                 search2 = {},
-                profile2 = {},
+                fav2 = {},
                 home3 = {},
                 search3 = {},
-                profile3 = {},
+                fav3 = {},
                 property1 = Property1.Perfil,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -195,13 +195,13 @@ fun LupaW2Property1Inicio(
 }
 
 @Composable
-fun PerfilWProperty1Inicio(
-    profile: () -> Unit,
+fun FavW1Property1Inicio(
+    fav1: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     RelayVector(
-        vector = painterResource(R.drawable.menu_perfil_w),
-        modifier = modifier.tappable(onTap = profile).requiredWidth(28.0.dp).requiredHeight(28.0.dp)
+        vector = painterResource(R.drawable.menu_fav_w1),
+        modifier = modifier.tappable(onTap = fav1).requiredWidth(28.0.dp).requiredHeight(28.0.dp)
     )
 }
 
@@ -286,13 +286,13 @@ fun LupaBProperty1Buscar(
 }
 
 @Composable
-fun Perfil2WProperty1Buscar(
-    profile2: () -> Unit,
+fun FavW2Property1Buscar(
+    fav2: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     RelayVector(
-        vector = painterResource(R.drawable.menu_perfil2w),
-        modifier = modifier.tappable(onTap = profile2).requiredWidth(28.0.dp).requiredHeight(28.0.dp)
+        vector = painterResource(R.drawable.menu_fav_w2),
+        modifier = modifier.tappable(onTap = fav2).requiredWidth(28.0.dp).requiredHeight(28.0.dp)
     )
 }
 
@@ -377,13 +377,13 @@ fun LupaW1Property1Perfil(
 }
 
 @Composable
-fun PerfilBProperty1Perfil(
-    profile3: () -> Unit,
+fun FavBProperty1Perfil(
+    fav3: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     RelayVector(
-        vector = painterResource(R.drawable.menu_perfil_b),
-        modifier = modifier.tappable(onTap = profile3).requiredWidth(28.0.dp).requiredHeight(28.0.dp)
+        vector = painterResource(R.drawable.menu_fav_b),
+        modifier = modifier.tappable(onTap = fav3).requiredWidth(28.0.dp).requiredHeight(28.0.dp)
     )
 }
 

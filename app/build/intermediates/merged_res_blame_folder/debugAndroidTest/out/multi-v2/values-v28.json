@@ -4,7 +4,7 @@
             "outputFile": "com.lespsan543.apppeliculas.test.app-mergeDebugAndroidTestResources-32:/values-v28/values-v28.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\1b69bd0d4187f86638177aef60470ee6\\transformed\\core-1.5.0\\res\\values-v28\\values.xml",
+                    "source": "C:\\Users\\lucia\\.gradle\\caches\\transforms-3\\02e250e9ef1b25118774adbc3f68a57d\\transformed\\core-1.5.0\\res\\values-v28\\values.xml",
                     "from": {
                         "startLines": "4,13",
                         "startColumns": "0,0",

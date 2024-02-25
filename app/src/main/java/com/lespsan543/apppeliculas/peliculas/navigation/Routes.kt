@@ -5,6 +5,10 @@ package com.lespsan543.apppeliculas.peliculas.navigation
  * @param route ruta a la que va a dirigirse
  */
 sealed class Routes(val route:String) {
+    object LogInScreen : Routes("LogInScreen")
+
+    object RegisterScreen : Routes("RegisterScreen")
+
     object MoviesScreen : Routes("MoviesScreen")
 
     object SeriesScreen : Routes("SeriesScreen")

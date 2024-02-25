@@ -1,0 +1,120 @@
+package com.lespsan543.apppeliculas.peliculas.ui
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuDefaults.textFieldColors
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.core.content.res.ResourcesCompat
+import androidx.navigation.NavController
+import com.lespsan543.apppeliculas.R
+import com.lespsan543.apppeliculas.peliculas.data.util.Constants.FONT_FAMILY
+import com.lespsan543.apppeliculas.peliculas.navigation.Routes
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewModel){
+    val wrong by viewModel.wrong.collectAsState()
+    val email = viewModel.email
+    val password = viewModel.password
+    BoxWithConstraints {
+        val with = maxWidth
+        val height = maxHeight
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .background(Color(85, 85, 85)),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally)
+        {
+            Text(text = "Iniciar sesión", fontSize = 30.sp,
+                modifier = Modifier.padding(top = height*0.1f), color = Color.White, fontFamily = FONT_FAMILY
+            )
+            Spacer(modifier = Modifier.height(height * 0.1f))
+            TextField(value = email,
+                onValueChange = { viewModel.writeEmail(it) },
+                label = { Text(text = "Email...", color = Color.DarkGray, fontFamily = FONT_FAMILY) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                colors = textFieldColors(
+                    containerColor = Color.White,
+                    textColor = Color.Black
+                )
+            )
+            Spacer(modifier = Modifier.height(height * 0.1f))
+            TextField(value = password,
+                onValueChange = { viewModel.writePassword(it) },
+                label = { Text(text = "Password...",  color = Color.DarkGray, fontFamily = FONT_FAMILY) },
+                colors = textFieldColors(
+                    containerColor = Color.White,
+                    textColor = Color.Black,
+                    unfocusedIndicatorColor = Color.LightGray
+                )
+            )
+            Spacer(modifier = Modifier.height(height * 0.1f))
+            OutlinedButton(onClick = { viewModel.logIn { navController.navigate(Routes.MoviesScreen.route) } },
+                modifier = Modifier
+                    .height(height * 0.06f)
+                    .width(with * 0.35f),
+                shape = RoundedCornerShape(10.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.White, contentColor = Color.Black))
+            {
+                Text(text = "Iniciar sesión", fontFamily = FONT_FAMILY)
+            }
+            Spacer(modifier = Modifier.height(height * 0.15f))
+            Row {
+                Text(text = "¿Aun no te has registrado?", color = Color.White, fontFamily = FONT_FAMILY)
+                ClickableText(onClick = { navController.navigate(Routes.RegisterScreen.route) },
+                    text = AnnotatedString("Registrarse"),
+                    style = TextStyle(
+                        color = Color(59, 161, 255),
+                        fontSize = 16.sp,
+                        textDecoration = TextDecoration.Underline,
+                        fontFamily = FONT_FAMILY
+                    )
+                )            }
+            if (wrong == true){
+                AlertDialog(onDismissRequest = {  },
+                    confirmButton = { Button(onClick = { viewModel.closeDialog() }) {
+                        Text(text = "Aceptar", fontFamily = FONT_FAMILY)
+                        }
+                    },
+                    text = { Text(text = "Algún dato es incorrecto", fontFamily = FONT_FAMILY)}
+                )
+            }
+        }
+    }
+}

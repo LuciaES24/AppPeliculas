@@ -12,16 +12,21 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
+import com.lespsan543.apppeliculas.peliculas.ui.FavoritesScreen
+import com.lespsan543.apppeliculas.peliculas.ui.LogInScreen
 import com.lespsan543.apppeliculas.peliculas.ui.MoviesScreen
+import com.lespsan543.apppeliculas.peliculas.ui.RegisterScreen
 import com.lespsan543.apppeliculas.peliculas.ui.SeriesScreen
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
 import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewModel
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.ProfileViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SearchViewModel
 
 class MainActivity : ComponentActivity() {
     private val moviesOrSeriesViewModel : MoviesOrSeriesViewModel by viewModels()
-    private val profileViewModel : ProfileViewModel by viewModels()
+    private val logInOrRegisterViewModel : LogInOrRegisterViewModel by viewModels()
+    private val favotitesViewModel : FavotitesViewModel by viewModels()
     private val searchViewModel : SearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,14 +39,22 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navController = rememberNavController()
-                    NavHost(navController = navController, startDestination = Routes.MoviesScreen.route) {
+                    NavHost(navController = navController, startDestination = Routes.LogInScreen.route) {
+                        composable(Routes.LogInScreen.route) {
+                            LogInScreen(navController, logInOrRegisterViewModel)
+                        }
+                        composable(Routes.RegisterScreen.route) {
+                            RegisterScreen(navController, logInOrRegisterViewModel)
+                        }
                         composable(Routes.MoviesScreen.route) {
                             MoviesScreen(navController, moviesOrSeriesViewModel)
                         }
                         composable(Routes.SeriesScreen.route) {
                             SeriesScreen(navController, moviesOrSeriesViewModel)
                         }
-
+                        composable(Routes.ProfileScreen.route) {
+                            FavoritesScreen(navController, favotitesViewModel)
+                        }
                     }
                 }
             }
