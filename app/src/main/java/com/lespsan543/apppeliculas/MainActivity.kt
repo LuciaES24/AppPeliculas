@@ -16,12 +16,13 @@ import com.lespsan543.apppeliculas.peliculas.ui.FavoritesScreen
 import com.lespsan543.apppeliculas.peliculas.ui.LogInScreen
 import com.lespsan543.apppeliculas.peliculas.ui.MoviesScreen
 import com.lespsan543.apppeliculas.peliculas.ui.RegisterScreen
+import com.lespsan543.apppeliculas.peliculas.ui.SearchScreen
 import com.lespsan543.apppeliculas.peliculas.ui.SeriesScreen
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
-import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
-import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
+import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewModel
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SearchViewModel
+import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
 
 class MainActivity : ComponentActivity() {
     private val moviesOrSeriesViewModel : MoviesOrSeriesViewModel by viewModels()
@@ -54,6 +55,9 @@ class MainActivity : ComponentActivity() {
                         }
                         composable(Routes.ProfileScreen.route) {
                             FavoritesScreen(navController, favotitesViewModel)
+                        }
+                        composable(Routes.SearchScreen.route) {
+                            SearchScreen(navController, searchViewModel)
                         }
                     }
                 }

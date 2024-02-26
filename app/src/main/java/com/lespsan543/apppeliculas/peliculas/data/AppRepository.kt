@@ -22,6 +22,15 @@ class AppRepository {
         }
     }
 
+    suspend fun getFindSearchState(movieOrSerie: String) : SearchState{
+        val response : Response<SearchModel> = apiService.getMoviesOrSeries(movieOrSerie)
+        return if (response.isSuccessful){
+            response.body()?.toSearchState() ?: SearchState()
+        }else{
+            SearchState()
+        }
+    }
+
     fun getMovieState(searchState: SearchState, position:Int): MovieState {
         return searchState.search[position]
     }

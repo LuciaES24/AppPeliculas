@@ -1,7 +1,6 @@
 package com.lespsan543.apppeliculas.peliculas.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,27 +19,25 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuDefaults.textFieldColors
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.res.ResourcesCompat
 import androidx.navigation.NavController
-import com.lespsan543.apppeliculas.R
 import com.lespsan543.apppeliculas.peliculas.data.util.Constants.FONT_FAMILY
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
@@ -49,6 +45,7 @@ import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewMod
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewModel){
+    var hidden by remember { mutableStateOf(true) }
     val wrong by viewModel.wrong.collectAsState()
     val email = viewModel.email
     val password = viewModel.password
@@ -72,7 +69,8 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                 colors = textFieldColors(
                     containerColor = Color.White,
                     textColor = Color.Black
-                )
+                ),
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(height * 0.1f))
             TextField(value = password,
@@ -82,8 +80,11 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                     containerColor = Color.White,
                     textColor = Color.Black,
                     unfocusedIndicatorColor = Color.LightGray
+                ),
+                singleLine = true,
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = PasswordVisualTransformation()
                 )
-            )
             Spacer(modifier = Modifier.height(height * 0.1f))
             OutlinedButton(onClick = { viewModel.logIn { navController.navigate(Routes.MoviesScreen.route) } },
                 modifier = Modifier

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class FavotitesViewModel :ViewModel() {
 
@@ -21,6 +20,13 @@ class FavotitesViewModel :ViewModel() {
 
     private var _favoritesList = MutableStateFlow<List<MovieState>>(emptyList())
     var favoritesList : StateFlow<List<MovieState>> = _favoritesList.asStateFlow()
+
+    private var _selected = MutableStateFlow(false)
+    var selected : StateFlow<Boolean> = _selected
+
+    fun showSelected(){
+        _selected.value = !_selected.value
+    }
 
     fun fetchMoviesAndSeries() {
         val email = auth.currentUser?.email

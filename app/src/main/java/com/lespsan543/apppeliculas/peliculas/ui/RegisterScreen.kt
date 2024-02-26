@@ -65,7 +65,8 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                 colors = ExposedDropdownMenuDefaults.textFieldColors(
                     containerColor = Color.White,
                     textColor = Color.Black
-                )
+                ),
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
             TextField(value = email,
@@ -75,7 +76,8 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                 colors = ExposedDropdownMenuDefaults.textFieldColors(
                     containerColor = Color.White,
                     textColor = Color.Black
-                )
+                ),
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
             TextField(value = password,
@@ -85,7 +87,8 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                     containerColor = Color.White,
                     textColor = Color.Black,
                     unfocusedIndicatorColor = Color.LightGray
-                )
+                ),
+                singleLine = true
             )
             Spacer(modifier = Modifier.height(height * 0.08f))
             OutlinedButton(onClick = { viewModel.createUser { navController.navigate(Routes.MoviesScreen.route) } },

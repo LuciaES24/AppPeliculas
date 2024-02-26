@@ -1,7 +1,9 @@
 package com.lespsan543.apppeliculas.peliculas.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -24,7 +26,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -35,6 +37,7 @@ import coil.compose.AsyncImage
 import com.lespsan543.apppeliculas.cabecera.Cabecera
 import com.lespsan543.apppeliculas.cabecera.Property1
 import com.lespsan543.apppeliculas.menu.Menu
+import com.lespsan543.apppeliculas.peliculas.data.util.Constants.FONT_FAMILY
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.states.MovieState
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
@@ -44,12 +47,11 @@ import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
 @Composable
 fun FavoritesScreen(navController: NavHostController, favoritesViewModel: FavotitesViewModel) {
     val favoritesList by favoritesViewModel.favoritesList.collectAsState()
+    val showSelected by favoritesViewModel.selected.collectAsState()
     LaunchedEffect(Unit){
         favoritesViewModel.fetchMoviesAndSeries()
     }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
-        val width = maxWidth
-        val height = maxHeight
         Scaffold(
             topBar = {
                 Cabecera(
@@ -65,54 +67,109 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                         .height(maxHeight.times(0.08f)),
                     home3 = { navController.navigate(Routes.MoviesScreen.route) },
                     search3 = { navController.navigate(Routes.SearchScreen.route) },
-                    fav3 = { navController.navigate(Routes.ProfileScreen.route) }
+                    fav3 = { navController.navigate(Routes.ProfileScreen.route) },
+                    property1 = com.lespsan543.apppeliculas.menu.Property1.Perfil
                 )
             },
             ) {
-            Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
-            LazyVerticalGrid(
-                GridCells.Fixed(2),
-                contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp)
-            ) {
-                items(favoritesList) {
-                    ShowMovieOrSerie(movieOrSerie = it, maxHeight)//onItemSelected= {}
+            if(favoritesList.isNotEmpty()){
+                Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
+                LazyVerticalGrid(
+                    GridCells.Fixed(2),
+                    contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp),
+                    modifier = Modifier
+                        .background(Color(199,199,199))
+                        .padding(top = maxHeight*0.08f, bottom = maxHeight*0.08f)
+                ) {
+                    items(favoritesList) {
+                        ShowMovieOrSerie(movieOrSerie = it,
+                            maxHeight,
+                            selectedMovieOrSerie = { favoritesViewModel.showSelected() })
+                        if (showSelected){
+                            SelectedMovieOrSerie(
+                                movieOrSerie = it,
+                                height = maxHeight,
+                                favoritesViewModel = favoritesViewModel
+                            )
+                        }
+                    }
+                }
+                Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
+            }else{
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(text = "Aún no tienes nada en favoritos",
+                        color = Color.Black,
+                        textAlign = TextAlign.Center,
+                        fontSize = 18.sp,
+                        fontFamily = FONT_FAMILY
+                    )
                 }
             }
-            Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
         }
     }
 }
 
 @Composable
 fun ShowMovieOrSerie(movieOrSerie : MovieState,
-                     maxHeigth : Dp
-             //onItemSelected : (Superhero) -> Unit)
+                     maxHeigth : Dp,
+                    selectedMovieOrSerie : (MovieState) -> Unit
 ){
     Card(modifier = Modifier
         .fillMaxWidth()
-        //.clickable { onItemSelected(superhero) }
+        .clickable { selectedMovieOrSerie(movieOrSerie) }
         .padding(4.dp)
-        .height(maxHeigth * 0.45f)){
-        Column {
+        .height(maxHeigth * 0.47f)
+        .background(Color.Transparent),
+        shape = RectangleShape){
+        Column(modifier = Modifier
+            .background(Color.Transparent)
+            .fillMaxSize()) {
             AsyncImage(
                 model = movieOrSerie.poster,
-                contentDescription = "",
+                contentDescription = null,
                 modifier = Modifier.fillMaxWidth()
             )
             Text(text = movieOrSerie.title,
                 fontSize = 15.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                textAlign = TextAlign.Center)
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontFamily = FONT_FAMILY
+            )
             Text(text = movieOrSerie.year,
                 fontSize = 13.sp,
-                modifier = Modifier.align(Alignment.CenterHorizontally))
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                color = Color.Black,
+                fontFamily = FONT_FAMILY
+            )
         }
     }
 }
 
 @Composable
-fun SelectedMovieOrSerie(){
-    Dialog(onDismissRequest = { /*TODO*/ }) {
-
+fun SelectedMovieOrSerie(movieOrSerie:MovieState,
+                         height : Dp,
+                         favoritesViewModel: FavotitesViewModel){
+    Dialog(onDismissRequest = { favoritesViewModel.showSelected() }) {
+        Column(modifier = Modifier
+            .fillMaxSize()
+            .background(Color(199,199,199)),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            AsyncImage(model = movieOrSerie.poster,
+                contentDescription = null,
+                modifier = Modifier.height(height*0.80f))
+            Text(text = movieOrSerie.title,
+                fontFamily = FONT_FAMILY,
+                color = Color.Black,
+                fontSize = 18.sp)
+            Text(text = movieOrSerie.year,
+                fontFamily = FONT_FAMILY,
+                color = Color.Black,
+                fontSize = 15.sp)
+        }
     }
 }

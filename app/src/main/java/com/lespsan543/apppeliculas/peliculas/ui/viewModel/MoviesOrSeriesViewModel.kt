@@ -1,8 +1,5 @@
 package com.lespsan543.apppeliculas.peliculas.ui.viewModel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -17,7 +14,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 /**
  * ViewModel responsable del flujo de películas y series conectándose a la API, además
@@ -71,11 +67,6 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private var _actualMovie = MutableStateFlow(0)
 
     private var _actualSerie = MutableStateFlow(0)
-
-    var actualDocument = MutableStateFlow(MovieState())
-
-    var movieOrSerieState by mutableStateOf(MovieState())
-        private set
 
     init {
         getAllMovies()
