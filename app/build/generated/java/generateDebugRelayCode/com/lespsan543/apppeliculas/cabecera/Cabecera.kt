@@ -7,18 +7,14 @@ import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import com.google.relay.compose.CrossAxisAlignment
-import com.google.relay.compose.MainAxisAlignment
 import com.google.relay.compose.RelayContainer
 import com.google.relay.compose.RelayContainerArrangement
 import com.google.relay.compose.RelayContainerScope
@@ -45,19 +41,11 @@ fun Cabecera(
 ) {
     when (property1) {
         Property1.Perfil -> TopLevelProperty1Perfil(modifier = modifier) {
-            FavoritosProperty1Perfil()
+            FavoritosProperty1Perfil(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
             VectorProperty1Perfil(ajustes = ajustes)
         }
         Property1.BuscarPeli -> TopLevelProperty1BuscarPeli(modifier = modifier) {
-            BuscarProperty1BuscarPeli(
-                modifier = Modifier.boxAlign(
-                    alignment = Alignment.Center,
-                    offset = DpOffset(
-                        x = 0.0.dp,
-                        y = -1.0.dp
-                    )
-                )
-            )
+            BuscarProperty1BuscarPeli(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
         }
     }
 }
@@ -76,7 +64,7 @@ private fun CabeceraProperty1PerfilPreview() {
     }
 }
 
-@Preview(widthDp = 360, heightDp = 56)
+@Preview(widthDp = 358, heightDp = 57)
 @Composable
 private fun CabeceraProperty1BuscarPeliPreview() {
     MaterialTheme {
@@ -84,7 +72,7 @@ private fun CabeceraProperty1BuscarPeliPreview() {
             Cabecera(
                 ajustes = {},
                 property1 = Property1.BuscarPeli,
-                modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
+                modifier = Modifier.rowWeight(1.0f)
             )
         }
     }
@@ -105,7 +93,7 @@ fun FavoritosProperty1Perfil(modifier: Modifier = Modifier) {
         height = 1.18701171875.em,
         textAlign = TextAlign.Left,
         maxLines = -1,
-        modifier = modifier.requiredWidth(115.0.dp).requiredHeight(19.0.dp)
+        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
 }
 
@@ -132,16 +120,13 @@ fun TopLevelProperty1Perfil(
             green = 107,
             blue = 107
         ),
-        mainAxisAlignment = MainAxisAlignment.Start,
-        crossAxisAlignment = CrossAxisAlignment.Start,
         arrangement = RelayContainerArrangement.Row,
         padding = PaddingValues(
-            start = 126.0.dp,
-            top = 14.0.dp,
+            start = 125.0.dp,
+            top = 12.0.dp,
             end = 15.0.dp,
-            bottom = 14.0.dp
+            bottom = 12.0.dp
         ),
-        itemSpacing = 75.0,
         content = content,
         modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
@@ -162,7 +147,7 @@ fun BuscarProperty1BuscarPeli(modifier: Modifier = Modifier) {
         height = 1.18701171875.em,
         textAlign = TextAlign.Left,
         maxLines = -1,
-        modifier = modifier.requiredWidth(88.0.dp).requiredHeight(30.0.dp)
+        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
     )
 }
 
@@ -178,8 +163,15 @@ fun TopLevelProperty1BuscarPeli(
             green = 107,
             blue = 107
         ),
-        isStructured = false,
+        arrangement = RelayContainerArrangement.Row,
+        padding = PaddingValues(
+            start = 136.0.dp,
+            top = 12.0.dp,
+            end = 136.0.dp,
+            bottom = 12.0.dp
+        ),
+        itemSpacing = 10.0,
         content = content,
-        modifier = modifier.fillMaxWidth(1.0f).fillMaxHeight(1.0f)
+        modifier = modifier.fillMaxWidth(1.0f)
     )
 }

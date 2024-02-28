@@ -24,9 +24,6 @@ drawable menu_lupa22w
 drawable menu_lupa2w
 drawable menu_lupa_b1
 drawable menu_lupa_b2
-drawable menu_perfil2w
-drawable menu_perfil_b
-drawable menu_perfil_w
 font kameron_font
 font relay_kameron_bold
 font relay_kameron_medium

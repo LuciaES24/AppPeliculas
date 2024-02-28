@@ -4,9 +4,6 @@ plugins {
     id("kotlin-android")
     //Relay
     id("com.google.relay") version "0.3.10"
-    //Dagger Hilt
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
 }
 
@@ -84,7 +81,7 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx:24.10.1")
     //Navigation
     implementation("androidx.navigation:navigation-compose:2.7.5")
-    //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    //Iconos
+    implementation ("androidx.compose.material:material-icons-core:1.1.0-alpha03")
+    implementation ("androidx.compose.material:material-icons-extended:1.1.0-alpha03")
 }

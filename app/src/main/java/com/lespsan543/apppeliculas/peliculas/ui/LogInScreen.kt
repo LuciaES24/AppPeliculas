@@ -13,11 +13,16 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuDefaults.textFieldColors
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -34,6 +39,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -83,8 +89,16 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                 ),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = PasswordVisualTransformation()
-                )
+                visualTransformation =
+                if (hidden) PasswordVisualTransformation() else VisualTransformation.None,
+                trailingIcon = {
+                    IconButton(onClick = { hidden = !hidden }) {
+                        val vector = if (hidden) Icons.Filled.Visibility
+                            else Icons.Filled.VisibilityOff
+                        val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña" //6
+                        Icon(imageVector = vector, contentDescription = description)
+                    }
+            })
             Spacer(modifier = Modifier.height(height * 0.1f))
             OutlinedButton(onClick = { viewModel.logIn { navController.navigate(Routes.MoviesScreen.route) } },
                 modifier = Modifier
@@ -98,7 +112,8 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
             Spacer(modifier = Modifier.height(height * 0.15f))
             Row {
                 Text(text = "¿Aun no te has registrado?", color = Color.White, fontFamily = FONT_FAMILY)
-                ClickableText(onClick = { navController.navigate(Routes.RegisterScreen.route) },
+                ClickableText(onClick = { navController.navigate(Routes.RegisterScreen.route)
+                                          viewModel.reset()},
                     text = AnnotatedString("Registrarse"),
                     style = TextStyle(
                         color = Color(59, 161, 255),

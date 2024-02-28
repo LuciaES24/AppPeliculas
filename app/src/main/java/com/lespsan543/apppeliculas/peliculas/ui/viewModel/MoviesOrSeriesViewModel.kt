@@ -19,6 +19,9 @@ import kotlinx.coroutines.launch
  * ViewModel responsable del flujo de películas y series conectándose a la API, además
  * de añadir las películas o series a la base de datos que el usuario añada a favoritos
  *
+ * @property auth Instancia de FirebaseAuth utilizada para obtener el usuario actual
+ * @property firestore Instancia de FirebaseFirestore utilizada para operaciones en la base de datos
+ * @property getMovieOrSerieUseCase caso de uso para invocar la función que busca una película o serie en la base de datos
  * @property names lista con palabras que le pasaremos a la API para que haga la búsqueda
  * @property _moviePosition flujo de datos que mantiene la posición de la película que se va a mostrar al usuario
  * @property moviePosition estado público de la posición de la película o serie
@@ -28,6 +31,17 @@ import kotlinx.coroutines.launch
  * @property _serieCounter guarda las veces que se pide una película en concreto a la API
  * @property _loopMovieCounter controla si ya se ha realizado una búsqueda por cada película
  * @property _loopSerieCounter controla si ya se ha realizado una búsqueda por cada serie
+ * @property movie datos de la película actual que se está mostrando
+ * @property serie datos de la serie actual que se está mostrando
+ * @property _movieList flujo de datos de las películas que se han recogido en la API
+ * @property movieList estado público de la lista de películas recogida
+ * @property _serieList flujo de datos de las series que se han encontrado en la API
+ * @property serieList estado público de la lista de series recogida
+ * @property _propertyButton flujo de datos de la propiedad en la que se encuetra en botón de guardado
+ * @property propertyButton estado público de la propiedad del botón de guardado
+ * @property _actualMovie flujo de datos de la posición de la película que se está mostrando actualmente
+ * @property _actualSerie flujo de datos de la posición de la serie que se está mostrando actualmente
+ * @property _moviesInDB flujo de datos de las películas que se han recogido de la base de datos
  */
 class MoviesOrSeriesViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
@@ -68,17 +82,25 @@ class MoviesOrSeriesViewModel : ViewModel() {
 
     private var _actualSerie = MutableStateFlow(0)
 
+    private var _moviesInDB = MutableStateFlow<List<MovieState>>(emptyList())
+
     init {
+        //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
         getAllMovies()
         getAllSeries()
     }
 
-     private fun getAllMovies(){
+    /**
+     * Buscamos una lista de películas en la API
+     */
+     fun getAllMovies(){
          viewModelScope.launch {
              val lista = mutableListOf<MovieState>()
+             //Por cada nombre en la lista, buscamos una película con esa palabra
              for (element in names){
                  _actualMovie.value = names.indexOf(element)
                  movie.value = getMovieOrSerieUseCase.invoke(element,_movieCounter.value, "Movie")
+                 //Si la película tiene poster, la añadimos en la lista para mostrarla
                  if (movie.value.poster != "N/A"){
                      lista.add(movie.value)
                  }
@@ -88,12 +110,17 @@ class MoviesOrSeriesViewModel : ViewModel() {
          }
      }
 
-    private fun getAllSeries(){
+    /**
+     * Buscamos una lista de series en la API
+     */
+    fun getAllSeries(){
         viewModelScope.launch {
             val lista = mutableListOf<MovieState>()
+            //Por cada nombre en la lista, buscamos una serie con esa palabra
             for (element in names){
                 _actualSerie.value = names.indexOf(element)
                 serie.value = getMovieOrSerieUseCase.invoke(element,_serieCounter.value, "Serie")
+                //Si la serie tiene poster, la añadimos en la lista para mostrarla
                 if (serie.value.poster != "N/A"){
                     lista.add(serie.value)
                 }
@@ -103,32 +130,87 @@ class MoviesOrSeriesViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Comprueba si el nombre de la película ya se encuentra en la base de datos
+     * para mostrar el botón de guardado correspondiente
+     *
+     * @param title título de la película o serie que queremos comprobar
+     */
+    fun findMovieInList(title: String){
+        for (movie in _moviesInDB.value) {
+            if (title == movie.title){
+                _propertyButton.value = Property1.Guardado
+            }
+        }
+    }
+
+    /**
+     * Busca todas las películas y series que ya están añadidas a favoritos
+     * en la base de datos
+     */
+    fun fetchMoviesInDB() {
+        val email = auth.currentUser?.email
+        firestore.collection("Favoritos")
+            .whereEqualTo("emailUser", email.toString())
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+                val movies = mutableListOf<MovieState>()
+                if (querySnapshot != null) {
+                    for (document in querySnapshot) {
+                        val movie = document.toObject(MovieState::class.java)
+                        movie.idDoc = document.id
+                        movies.add(movie)
+                    }
+                }
+                _moviesInDB.value = movies
+            }
+    }
+
+    /**
+     * Busca nuevas películas si se cumplen las condiciones
+     */
     fun newMovies(){
+        //Si se está mostrando la última película de la lista
+        //busca nuevas películas en la base de datos
         if (_loopMovieCounter.value == _movieList.value.size){
             _loopMovieCounter.value = 0
             _moviePosition.value = 0
             _movieCounter.value++
             getAllMovies()
         }else{
+            //Si no, muestra la siguiente película y añade uno al contador de bucle
+            //para ir comprobando si se encuentra en la última de la lista
             _propertyButton.value = Property1.Default
             _moviePosition.value++
             _loopMovieCounter.value++
         }
     }
 
+    /**
+     * Busca nuevas series si se cumplen las condiciones
+     */
     fun newSeries(){
+        //Si se está mostrando la última serie de la lista
+        //busca nuevas series en la base de datos
         if (_loopSerieCounter.value == _serieList.value.size){
             _loopSerieCounter.value = 0
             _seriePosition.value = 0
             _serieCounter.value++
             getAllSeries()
         }else{
+            //Si no, muestra la siguiente serie y añade uno al contador de bucle
+            //para ir comprobando si se encuentra en la última de la lista
             _propertyButton.value = Property1.Default
             _seriePosition.value++
             _loopSerieCounter.value++
         }
     }
 
+    /**
+     * Cambia la propiedad del botón de guardado dependiendo de cuando se pulsa
+     */
     fun guardarPeliculaOSerie(){
         if (_propertyButton.value == Property1.Default){
             _propertyButton.value = Property1.Guardado
@@ -137,6 +219,11 @@ class MoviesOrSeriesViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Guarda la película o serie que se le indica en la base de datos
+     *
+     * @param movieState película o serie que queremos añadir a favoritos
+     */
     fun saveMovieOrSerie(movieState: MovieState) {
         val email = auth.currentUser?.email
 
@@ -145,7 +232,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
                 val newMovieOrSerie = hashMapOf(
                     "title" to movieState.title,
                     "poster" to movieState.poster,
-                    "id" to movieState.imdbID,
+                    "imdbID" to movieState.imdbID,
                     "type" to movieState.type,
                     "year" to movieState.year,
                     "emailUser" to email.toString()
@@ -164,6 +251,11 @@ class MoviesOrSeriesViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Elimina una película o serie de la base de datos a partir de su id
+     *
+     * @param id identificador de la película o serie que se quiere eliminar
+     */
     fun deleteMovieOrSerie(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -180,9 +272,5 @@ class MoviesOrSeriesViewModel : ViewModel() {
                 _propertyButton.value = Property1.Guardado
             }
         }
-    }
-
-    fun findMovieOrSerieInDatabase(id:String){
-
     }
 }

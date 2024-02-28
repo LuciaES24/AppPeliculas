@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -15,8 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Card
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -78,17 +81,19 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     GridCells.Fixed(2),
                     contentPadding = PaddingValues(horizontal = 4.dp, vertical = 4.dp),
                     modifier = Modifier
-                        .background(Color(199,199,199))
-                        .padding(top = maxHeight*0.08f, bottom = maxHeight*0.08f)
+                        .fillMaxSize()
+                        .background(Color(199, 199, 199))
+                        .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
-                    items(favoritesList) {
-                        ShowMovieOrSerie(movieOrSerie = it,
+                    items(favoritesList) {movieOrSerie ->
+                        ShowMovieOrSerie(movieOrSerie = movieOrSerie,
                             maxHeight,
-                            selectedMovieOrSerie = { favoritesViewModel.showSelected() })
+                            selectedMovieOrSerie = { favoritesViewModel.showSelected()
+                                                    favoritesViewModel.changeSelectedMovieOrSerie(movieOrSerie)})
                         if (showSelected){
                             SelectedMovieOrSerie(
-                                movieOrSerie = it,
                                 height = maxHeight,
+                                width = maxWidth,
                                 favoritesViewModel = favoritesViewModel
                             )
                         }
@@ -98,7 +103,11 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
             }else{
                 Column(
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color(199, 199, 199))
+                        .padding(top = maxHeight * 0.08f, bottom = maxHeight * 0.08f)
                 ) {
                     Text(text = "Aún no tienes nada en favoritos",
                         color = Color.Black,
@@ -117,13 +126,12 @@ fun ShowMovieOrSerie(movieOrSerie : MovieState,
                      maxHeigth : Dp,
                     selectedMovieOrSerie : (MovieState) -> Unit
 ){
-    Card(modifier = Modifier
+    Box(modifier = Modifier
         .fillMaxWidth()
         .clickable { selectedMovieOrSerie(movieOrSerie) }
         .padding(4.dp)
         .height(maxHeigth * 0.47f)
-        .background(Color.Transparent),
-        shape = RectangleShape){
+        .background(Color.Transparent)){
         Column(modifier = Modifier
             .background(Color.Transparent)
             .fillMaxSize()) {
@@ -150,26 +158,43 @@ fun ShowMovieOrSerie(movieOrSerie : MovieState,
 }
 
 @Composable
-fun SelectedMovieOrSerie(movieOrSerie:MovieState,
-                         height : Dp,
+fun SelectedMovieOrSerie(height : Dp,
+                         width :Dp,
                          favoritesViewModel: FavotitesViewModel){
+    val movieOrSerie by favoritesViewModel.selectedMovieOrSerie.collectAsState()
     Dialog(onDismissRequest = { favoritesViewModel.showSelected() }) {
         Column(modifier = Modifier
-            .fillMaxSize()
-            .background(Color(199,199,199)),
-            verticalArrangement = Arrangement.Center,
+            .height(height * 0.9f)
+            .background(Color(199, 199, 199))
+            .padding(top = height*0.1f),
             horizontalAlignment = Alignment.CenterHorizontally) {
             AsyncImage(model = movieOrSerie.poster,
                 contentDescription = null,
-                modifier = Modifier.height(height*0.80f))
+                modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(height * 0.01f))
             Text(text = movieOrSerie.title,
                 fontFamily = FONT_FAMILY,
                 color = Color.Black,
-                fontSize = 18.sp)
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp,
+                modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(height * 0.03f))
             Text(text = movieOrSerie.year,
                 fontFamily = FONT_FAMILY,
+                textAlign = TextAlign.Center,
                 color = Color.Black,
-                fontSize = 15.sp)
+                fontSize = 16.sp,
+                modifier = Modifier.fillMaxWidth())
+            Spacer(modifier = Modifier.height(height * 0.035f))
+            IconButton(onClick = { favoritesViewModel.deleteMovieOrSerie(movieOrSerie.idDoc) },
+                modifier = Modifier.padding(start = width*0.5f)) {
+                Icon(imageVector = Icons.Filled.Delete , contentDescription = null, tint = Color.Black)
+            }
         }
     }
+}
+
+@Composable
+fun ShowConfiguration(){
+
 }

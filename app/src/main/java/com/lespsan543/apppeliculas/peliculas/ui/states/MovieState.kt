@@ -8,8 +8,4 @@ class MovieState(
     var type : String = "",
     var poster : String = "",
     var idDoc : String = ""
-){
-    override fun toString(): String {
-        return "MovieState(title='$title', year='$year', imdbID='$imdbID', type='$type', poster='$poster')"
-    }
-}
+)

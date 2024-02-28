@@ -1,12 +1,12 @@
 package com.lespsan543.apppeliculas.peliculas.ui
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -56,6 +57,13 @@ fun ShowMovies(
     val moviePosition by moviesOrSeriesViewModel.moviePosition.collectAsState()
     val movieList by moviesOrSeriesViewModel.movieList.collectAsState()
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
+
+    LaunchedEffect(Unit){
+        moviesOrSeriesViewModel.getAllMovies()
+    }
+    LaunchedEffect(Unit){
+        moviesOrSeriesViewModel.fetchMoviesInDB()
+    }
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         val width = maxWidth
         val height = maxHeight
@@ -88,13 +96,20 @@ fun ShowMovies(
                 }
             }
         ) {
+            //Aparece si la información de la API ya ha sido cargada
             if (movieList.isNotEmpty()){
-                //Aparece si la información de la API ya ha sido cargada
+                //Miramos si la película ya está guardada en la base de datos
+                moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
                 Column(horizontalAlignment = Alignment.End,
-                    modifier = Modifier.fillMaxSize()) {
-                    ExtendedFloatingActionButton(onClick = { moviesOrSeriesViewModel.newMovies()},
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Black))
+                {
+                    ExtendedFloatingActionButton(onClick = { moviesOrSeriesViewModel.newMovies()
+                        moviesOrSeriesViewModel.findMovieInList(movieList[moviePosition].title)
+                    },
                         modifier = Modifier
-                            .fillMaxHeight()
+                            .fillMaxSize()
                             .width(width * 0.5f),
                         containerColor = Color.Transparent
                     ) {
