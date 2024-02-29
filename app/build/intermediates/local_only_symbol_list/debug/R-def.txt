@@ -8,6 +8,7 @@ color teal_200
 color teal_700
 color white
 drawable cabecera_vector
+drawable configuracion_vector
 drawable guardar_guardado
 drawable guardar_guardado2
 drawable ic_launcher_background
