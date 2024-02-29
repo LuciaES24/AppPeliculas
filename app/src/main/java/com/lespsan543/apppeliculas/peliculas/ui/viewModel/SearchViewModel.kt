@@ -27,6 +27,7 @@ import kotlinx.coroutines.launch
  * @property movieOrSerie titulo de la película o serie de la que el usuario va a realizar la búsqueda
  * @property listOfPropertyButtons lista que guarda las propiedades de todos los botones de favoritos que se han generado con la búsqueda
  * @property _moviesInDB flujo de datos de las películas que se han recogido de la base de datos
+ * @property _actualState flujo de datos de la película o serie actual que se está mostrando con los datos de la base de datos
  */
 class SearchViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
@@ -43,6 +44,8 @@ class SearchViewModel : ViewModel() {
     var listOfPropertyButtons = mutableListOf<Property1>()
 
     private var _moviesInDB = MutableStateFlow<List<MovieState>>(emptyList())
+
+    private var _actualState = MutableStateFlow(MovieState())
 
     /**
      * Guarda en la variable el título que escribe el usuario
@@ -81,6 +84,7 @@ class SearchViewModel : ViewModel() {
         for (movie in _moviesInDB.value) {
             if (title == movie.title) {
                 result = true
+                _actualState.value = movie
                 break
             }
         }
@@ -182,10 +186,10 @@ class SearchViewModel : ViewModel() {
      *
      * @param id identificador de la película o serie que se quiere eliminar
      */
-    fun deleteMovieOrSerie(id: String, index:Int) {
+    fun deleteMovieOrSerie(index:Int) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                firestore.collection("Favoritos").document(id)
+                firestore.collection("Favoritos").document(_actualState.value.idDoc)
                     .delete()
                     .addOnSuccessListener {
                         guardarPeliculaOSerie(index)

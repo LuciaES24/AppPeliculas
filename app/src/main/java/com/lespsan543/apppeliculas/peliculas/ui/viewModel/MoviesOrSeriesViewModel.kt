@@ -1,5 +1,6 @@
 package com.lespsan543.apppeliculas.peliculas.ui.viewModel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
  * @property getMovieOrSerieUseCase caso de uso para invocar la función que busca una película o serie en la base de datos
  * @property names lista con palabras que le pasaremos a la API para que haga la búsqueda
  * @property _moviePosition flujo de datos que mantiene la posición de la película que se va a mostrar al usuario
- * @property moviePosition estado público de la posición de la película o serie
+ * @property moviePosition estado público de la posición de la película
  * @property _seriePosition flujo de datos que mantiene la posición de la serie que se va a mostrar al usuario
  * @property seriePosition estado público de la posición de la serie
  * @property _movieCounter guarda las veces que se pide una película en concreto a la API
@@ -42,6 +43,7 @@ import kotlinx.coroutines.launch
  * @property _actualMovie flujo de datos de la posición de la película que se está mostrando actualmente
  * @property _actualSerie flujo de datos de la posición de la serie que se está mostrando actualmente
  * @property _moviesInDB flujo de datos de las películas que se han recogido de la base de datos
+ * @property _actualMovieState flujo de datos de la película actual que se está mostrando con los datos de la base de datos
  */
 class MoviesOrSeriesViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
@@ -83,6 +85,8 @@ class MoviesOrSeriesViewModel : ViewModel() {
     private var _actualSerie = MutableStateFlow(0)
 
     private var _moviesInDB = MutableStateFlow<List<MovieState>>(emptyList())
+
+    private var _actualMovieState = MutableStateFlow(MovieState())
 
     init {
         //Hacemos una primera búsqueda de películas y series al iniciar la aplicación
@@ -140,6 +144,7 @@ class MoviesOrSeriesViewModel : ViewModel() {
         for (movie in _moviesInDB.value) {
             if (title == movie.title){
                 _propertyButton.value = Property1.Guardado
+                _actualMovieState.value = movie
             }
         }
     }
@@ -256,17 +261,17 @@ class MoviesOrSeriesViewModel : ViewModel() {
      *
      * @param id identificador de la película o serie que se quiere eliminar
      */
-    fun deleteMovieOrSerie(id: String) {
+    fun deleteMovieOrSerie() {
+        Log.d("eliminar", _actualMovieState.value.idDoc)
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                firestore.collection("Favoritos").document(id)
+                firestore.collection("Favoritos").document(_actualMovieState.value.idDoc)
                     .delete()
                     .addOnSuccessListener {
                         guardarPeliculaOSerie()
                     }
                     .addOnFailureListener {
                         _propertyButton.value = Property1.Guardado
-                        throw Exception()
                     }
             } catch (e:Exception) {
                 _propertyButton.value = Property1.Guardado

@@ -38,24 +38,25 @@ import com.lespsan543.apppeliculas.menu.Property1
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewModel
 
-@Composable
-fun MoviesScreen(
-    navController: NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
-) {
-    ShowMovies(navController = navController,
-        moviesOrSeriesViewModel = moviesOrSeriesViewModel)
-}
-
+/**
+ * Muestra la pantalla inicial donde irán apareciendo películas según vayamos pulsando, estas
+ * se podrán añadir a favoritos y podremos navegar a otras pantallas
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShowMovies(
+fun MoviesScreen(
     navController: NavHostController,
     moviesOrSeriesViewModel: MoviesOrSeriesViewModel
 ) {
+    //Guarda la posición de la película que se muestra
     val moviePosition by moviesOrSeriesViewModel.moviePosition.collectAsState()
+    //Lista de películas obtenida
     val movieList by moviesOrSeriesViewModel.movieList.collectAsState()
+    //Propiedad del botón de guardado
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
 
     LaunchedEffect(Unit){
@@ -127,7 +128,7 @@ fun ShowMovies(
                         .padding(start = width*0.10f, top = height*0.85f),
                     property1 = property,
                     guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(movieList[moviePosition]) },
-                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie(movieList[moviePosition].idDoc) }
+                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
                 )
             }else{
                 //Aparece si aún no ha cargado la información de la API

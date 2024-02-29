@@ -24,6 +24,14 @@ import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewMode
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SearchViewModel
 import com.lespsan543.apppeliculas.ui.theme.AppPeliculasTheme
 
+/**
+ * Clase principal que se encarga de mostrar la interfaz al usuario y guarda la configuración de navegación de la app
+ *
+ * @property moviesOrSeriesViewModel viewModel que maneja los datos de las pantallas MoviesScreen() y SeriesScreen()
+ * @property logInOrRegisterViewModel viewModel que maneja los datos de las pantallas LogInScreen() y RegisterScreen()
+ * @property favotitesViewModel viewModel que maneja los datos de la pantalla de FavoritesScreen()
+ * @property searchViewModel viewModel que maneja los datos de la pantalla SearchScreen()
+ */
 class MainActivity : ComponentActivity() {
     private val moviesOrSeriesViewModel : MoviesOrSeriesViewModel by viewModels()
     private val logInOrRegisterViewModel : LogInOrRegisterViewModel by viewModels()

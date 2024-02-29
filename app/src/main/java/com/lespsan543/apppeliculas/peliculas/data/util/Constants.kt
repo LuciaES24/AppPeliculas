@@ -1,6 +1,5 @@
 package com.lespsan543.apppeliculas.peliculas.data.util
 
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import com.lespsan543.apppeliculas.R
@@ -16,6 +15,7 @@ object Constants {
     //Key de la API
     const val API_KEY = "apikey=a01dcc60"
 
+    //Fuente de texto que utilizamos en toda la aplicación
     val FONT_FAMILY = FontFamily(Font(R.font.kameron_font))
 
 }

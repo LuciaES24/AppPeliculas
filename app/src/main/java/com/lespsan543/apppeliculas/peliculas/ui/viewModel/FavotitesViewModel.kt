@@ -40,6 +40,9 @@ class FavotitesViewModel :ViewModel() {
     private val _selectedMovieOrSerie = MutableStateFlow(MovieState())
     var selectedMovieOrSerie : StateFlow<MovieState> = _selectedMovieOrSerie
 
+    /**
+     * Cierra la sesión del usuario
+     */
     fun signOut() {
         auth.signOut()
     }

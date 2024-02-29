@@ -49,13 +49,24 @@ import com.lespsan543.apppeliculas.peliculas.data.util.Constants
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
 
+/**
+ * Pantalla donde el usuario podrá registrarse con un nombre, email y contraseña
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param viewModel viewModel del que obtendremos los datos
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterViewModel){
+    //Determina si la contraseña está visible o no
     var hidden by remember { mutableStateOf(true) }
+    //Controla si algún dato es incorrecto para mostrar el mensaje de error
     val wrong by viewModel.wrong.collectAsState()
+    //Nombre que escriba el usuario
     val name = viewModel.name
+    //Email que escriba el usuario
     val email = viewModel.email
+    //Contraseña que escriba el usuario
     val password = viewModel.password
     BoxWithConstraints {
         val width = maxWidth
@@ -140,7 +151,9 @@ fun RegisterScreen(navController: NavController, viewModel : LogInOrRegisterView
                         textDecoration = TextDecoration.Underline,
                         fontFamily = Constants.FONT_FAMILY
                     )
-                )            }
+                )
+            }
+            //Se muestra si algún dato es incorrecto
             if (wrong == true){
                 AlertDialog(onDismissRequest = {  },
                     confirmButton = { Button(onClick = { viewModel.closeDialog() }) {

@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "AFdA8RFxJr5tJTbLkkKJfi",
     "node": "23:336",
-    "version": "5235601378",
+    "version": "5252582377",
     "component-id": "58f8889fd01d68f7dc165e292da2d869e3b17266"
   },
   "default": "Property 1=Perfil",
@@ -80,15 +80,15 @@
           },
           {
             "id": "Vector",
-            "tap-handler": "$ajustes",
+            "tap-handler": "$salir",
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": "28.0"
+                "value": "27.1875"
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": "27.99957275390625"
+                "value": "28.0"
               }
             },
             "vector-content": "vector.svg"
@@ -157,7 +157,7 @@
     }
   },
   "parameters": {
-    "ajustes": {
+    "salir": {
       "data-type": "void-callback",
       "required": false,
       "description": ""

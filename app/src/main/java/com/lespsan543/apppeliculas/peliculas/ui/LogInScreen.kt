@@ -48,12 +48,22 @@ import com.lespsan543.apppeliculas.peliculas.data.util.Constants.FONT_FAMILY
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.LogInOrRegisterViewModel
 
+/**
+ * Primera pantalla que se muestra al iniciar la aplicación donde el usuario podrá iniciar sesión con su email y contraseña
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param viewModel viewModel del que obtendremos los datos
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewModel){
+    //Determina si la contraseña está visible o no
     var hidden by remember { mutableStateOf(true) }
+    //Controla si algún dato es incorrecto para mostrar el mensaje de error
     val wrong by viewModel.wrong.collectAsState()
+    //Email que escriba el usuario
     val email = viewModel.email
+    //Contraseña que escriba el usuario
     val password = viewModel.password
     BoxWithConstraints {
         val with = maxWidth
@@ -95,7 +105,7 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                     IconButton(onClick = { hidden = !hidden }) {
                         val vector = if (hidden) Icons.Filled.Visibility
                             else Icons.Filled.VisibilityOff
-                        val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña" //6
+                        val description = if (hidden) "Ocultar contraseña" else "Revelar contraseña"
                         Icon(imageVector = vector, contentDescription = description)
                     }
             })
@@ -121,7 +131,9 @@ fun LogInScreen(navController: NavController, viewModel : LogInOrRegisterViewMod
                         textDecoration = TextDecoration.Underline,
                         fontFamily = FONT_FAMILY
                     )
-                )            }
+                )
+            }
+            //Se muestra si algún dato es incorrecto
             if (wrong == true){
                 AlertDialog(onDismissRequest = {  },
                     confirmButton = { Button(onClick = { viewModel.closeDialog() }) {

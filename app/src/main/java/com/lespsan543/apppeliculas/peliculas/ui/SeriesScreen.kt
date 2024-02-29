@@ -37,24 +37,25 @@ import com.lespsan543.apppeliculas.menu.Property1
 import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.MoviesOrSeriesViewModel
 
-@Composable
-fun SeriesScreen(
-    navController: NavHostController,
-    moviesOrSeriesViewModel: MoviesOrSeriesViewModel,
-){
-    ShowSeries(navController = navController,
-        moviesOrSeriesViewModel = moviesOrSeriesViewModel)
-}
-
+/**
+ * Muestra la pantalla inicial donde irán apareciendo series según vayamos pulsando, estas
+ * se podrán añadir a favoritos y podremos navegar a otras pantallas
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param moviesOrSeriesViewModel viewModel del que obtendremos los datos
+ */
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ShowSeries(
+fun SeriesScreen(
     navController: NavHostController,
     moviesOrSeriesViewModel: MoviesOrSeriesViewModel
 ) {
+    //Guarda la posición de la serie que se muestra
     val seriePosition by moviesOrSeriesViewModel.seriePosition.collectAsState()
+    //Lista de series obtenida
     val serieList by moviesOrSeriesViewModel.serieList.collectAsState()
+    //Propiedad del botón de guardado
     val property by moviesOrSeriesViewModel.propertyButton.collectAsState()
     BoxWithConstraints {
         val width = maxWidth
@@ -89,8 +90,10 @@ fun ShowSeries(
                 }
             }
         ) {
+            //Aparece si la información de la API ya ha sido cargada
             if (serieList.isNotEmpty()){
-                //Aparece si la información de la API ya ha sido cargada
+                //Miramos si la película ya está guardada en la base de datos
+                moviesOrSeriesViewModel.findMovieInList(serieList[seriePosition].title)
                 Column(horizontalAlignment = Alignment.End,
                     modifier = Modifier.fillMaxSize()) {
                     ExtendedFloatingActionButton(
@@ -114,7 +117,7 @@ fun ShowSeries(
                         .padding(start = width*0.10f, top = height*0.85f),
                     property1 = property,
                     guardar = { moviesOrSeriesViewModel.saveMovieOrSerie(serieList[seriePosition]) },
-                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie(serieList[seriePosition].imdbID) }
+                    eliminar = { moviesOrSeriesViewModel.deleteMovieOrSerie() }
                 )
             }else{
                 //Aparece si aún no ha cargado la información de la API

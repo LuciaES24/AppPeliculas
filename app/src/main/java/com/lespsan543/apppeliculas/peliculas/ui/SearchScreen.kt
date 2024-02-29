@@ -51,12 +51,21 @@ import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.states.MovieState
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.SearchViewModel
 
+/**
+ * Pantalla en la que podremos buscar películas y series a partir de un título
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param searchViewModel viewModel del que obtendremos los datos
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun SearchScreen(navController: NavHostController, searchViewModel: SearchViewModel){
+    //Lista de películas y series encontrada
     val findList by searchViewModel.moviesAndSeriesList.collectAsState()
+    //Título de la película o serie que va a buscar
     val movieOrSerie = searchViewModel.movieOrSerie
+    //Lista de propiedades de los botones de guardado por cada resultado
     val listOfPropertyButtons = searchViewModel.listOfPropertyButtons
 
     LaunchedEffect(Unit){
@@ -95,7 +104,6 @@ fun SearchScreen(navController: NavHostController, searchViewModel: SearchViewMo
                     TextField(value = movieOrSerie,
                         onValueChange = { searchViewModel.writeMovieOrSerie(it) },
                         label = { Text(text = "Nombre...", color = Color.White, fontFamily = FONT_FAMILY) },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         colors = ExposedDropdownMenuDefaults.textFieldColors(
                             containerColor = Color(40,40,40),
                             textColor = Color.White
@@ -181,12 +189,22 @@ fun SearchScreen(navController: NavHostController, searchViewModel: SearchViewMo
     }
 }
 
+/**
+ * Formato para mostrar una película o serie de la lista de búsqueda
+ *
+ * @param height altura de la pantalla
+ * @param index índice con la posición del botón en la lista
+ * @param movieOrSerie película o serie que se va a mostrar
+ * @param searchViewModel viewModel del que obtendremos los datos
+ */
 @Composable
 fun ShowMovieOrSerie(height: Dp,
                      index:Int,
                      movieOrSerie:MovieState,
                      searchViewModel: SearchViewModel){
+    //Lista de botones de guardar
     val listOfPropertyButtons = searchViewModel.listOfPropertyButtons
+    //Posición con la propiedad del botón concreto de guardar
     val movieOrSerieIndex = searchViewModel.findInList(movieOrSerie)
     BoxWithConstraints {
         val widthCard = maxWidth
@@ -222,7 +240,7 @@ fun ShowMovieOrSerie(height: Dp,
                     Guardar(
                         property1 = listOfPropertyButtons[index],
                         guardar = { searchViewModel.saveMovieOrSerie(movieOrSerie, movieOrSerieIndex) },
-                        eliminar = { searchViewModel.deleteMovieOrSerie(movieOrSerie.idDoc, movieOrSerieIndex) }
+                        eliminar = { searchViewModel.deleteMovieOrSerie(movieOrSerieIndex) }
                     )
                 }
             }

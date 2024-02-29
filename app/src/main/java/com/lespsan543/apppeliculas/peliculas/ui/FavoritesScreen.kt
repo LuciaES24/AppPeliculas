@@ -45,12 +45,21 @@ import com.lespsan543.apppeliculas.peliculas.navigation.Routes
 import com.lespsan543.apppeliculas.peliculas.ui.states.MovieState
 import com.lespsan543.apppeliculas.peliculas.ui.viewModel.FavotitesViewModel
 
+/**
+ * Muestra la pantalla de favoritos, donde se encuentran todas las películas y series que ha añadido el usuario
+ *
+ * @param navController nos permite realizar la navegación entre pantallas
+ * @param favoritesViewModel viewModel del que obtendremos los datos
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun FavoritesScreen(navController: NavHostController, favoritesViewModel: FavotitesViewModel) {
+    //Lista de películas y series que el usuario ha añadido a favoritos
     val favoritesList by favoritesViewModel.favoritesList.collectAsState()
+    //Booleano que determina si se ha pulsado sobre un elemento
     val showSelected by favoritesViewModel.selected.collectAsState()
+
     LaunchedEffect(Unit){
         favoritesViewModel.fetchMoviesAndSeries()
     }
@@ -61,7 +70,8 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     modifier = Modifier
                         .height(maxHeight.times(0.08f)),
                     Property1.Perfil,
-                    ajustes = {}
+                    salir = { favoritesViewModel.signOut()
+                              navController.navigate(Routes.LogInScreen.route)}
                 )
             },
             bottomBar = {
@@ -75,6 +85,7 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                 )
             },
             ) {
+            //Se muestra si hay algún elemento en la lista de favoritos
             if(favoritesList.isNotEmpty()){
                 Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
                 LazyVerticalGrid(
@@ -100,7 +111,8 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
                     }
                 }
                 Spacer(modifier = Modifier.height(maxHeight.times(0.08f)))
-            }else{
+            }//Se muestra si el usuario aún no ha añadido nada a favoritos
+            else{
                 Column(
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -121,6 +133,13 @@ fun FavoritesScreen(navController: NavHostController, favoritesViewModel: Favoti
     }
 }
 
+/**
+ * Muestra una película o serie mostrando la imagen, su título y el año de estreno
+ *
+ * @param movieOrSerie película o serie
+ * @param maxHeigth altura de la pantalla
+ * @param selectedMovieOrSerie determina que ocurre cuando se pulsa sobre el elemento
+ */
 @Composable
 fun ShowMovieOrSerie(movieOrSerie : MovieState,
                      maxHeigth : Dp,
@@ -157,6 +176,15 @@ fun ShowMovieOrSerie(movieOrSerie : MovieState,
     }
 }
 
+/**
+ * Muestra una película o serie cuando se ha pulsado sobre ella
+ *
+ * @param height altura de la pantalla
+ * @param width ancho de la pantalla
+ * @param favoritesViewModel viewModel responsable de los datos de la pantalla
+ *
+ * @property movieOrSerie película o serie que se ha seleccionado
+ */
 @Composable
 fun SelectedMovieOrSerie(height : Dp,
                          width :Dp,
@@ -166,7 +194,7 @@ fun SelectedMovieOrSerie(height : Dp,
         Column(modifier = Modifier
             .height(height * 0.9f)
             .background(Color(199, 199, 199))
-            .padding(top = height*0.1f),
+            .padding(top = height * 0.1f),
             horizontalAlignment = Alignment.CenterHorizontally) {
             AsyncImage(model = movieOrSerie.poster,
                 contentDescription = null,
@@ -186,15 +214,11 @@ fun SelectedMovieOrSerie(height : Dp,
                 fontSize = 16.sp,
                 modifier = Modifier.fillMaxWidth())
             Spacer(modifier = Modifier.height(height * 0.035f))
-            IconButton(onClick = { favoritesViewModel.deleteMovieOrSerie(movieOrSerie.idDoc) },
+            IconButton(onClick = { favoritesViewModel.deleteMovieOrSerie(movieOrSerie.idDoc)
+                                    favoritesViewModel.showSelected()},
                 modifier = Modifier.padding(start = width*0.5f)) {
                 Icon(imageVector = Icons.Filled.Delete , contentDescription = null, tint = Color.Black)
             }
         }
     }
-}
-
-@Composable
-fun ShowConfiguration(){
-
 }

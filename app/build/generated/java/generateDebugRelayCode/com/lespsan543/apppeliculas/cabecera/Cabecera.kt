@@ -37,12 +37,12 @@ enum class Property1 {
 fun Cabecera(
     modifier: Modifier = Modifier,
     property1: Property1 = Property1.Perfil,
-    ajustes: () -> Unit = {}
+    salir: () -> Unit = {}
 ) {
     when (property1) {
         Property1.Perfil -> TopLevelProperty1Perfil(modifier = modifier) {
             FavoritosProperty1Perfil(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
-            VectorProperty1Perfil(ajustes = ajustes)
+            VectorProperty1Perfil(salir = salir)
         }
         Property1.BuscarPeli -> TopLevelProperty1BuscarPeli(modifier = modifier) {
             BuscarProperty1BuscarPeli(modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f))
@@ -56,7 +56,7 @@ private fun CabeceraProperty1PerfilPreview() {
     MaterialTheme {
         RelayContainer {
             Cabecera(
-                ajustes = {},
+                salir = {},
                 property1 = Property1.Perfil,
                 modifier = Modifier.rowWeight(1.0f).columnWeight(1.0f)
             )
@@ -70,7 +70,7 @@ private fun CabeceraProperty1BuscarPeliPreview() {
     MaterialTheme {
         RelayContainer {
             Cabecera(
-                ajustes = {},
+                salir = {},
                 property1 = Property1.BuscarPeli,
                 modifier = Modifier.rowWeight(1.0f)
             )
@@ -99,12 +99,12 @@ fun FavoritosProperty1Perfil(modifier: Modifier = Modifier) {
 
 @Composable
 fun VectorProperty1Perfil(
-    ajustes: () -> Unit,
+    salir: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     RelayVector(
         vector = painterResource(R.drawable.cabecera_vector),
-        modifier = modifier.tappable(onTap = ajustes).requiredWidth(28.0.dp).requiredHeight(27.99957275390625.dp)
+        modifier = modifier.tappable(onTap = salir).requiredWidth(27.1875.dp).requiredHeight(28.0.dp)
     )
 }
 

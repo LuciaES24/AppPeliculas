@@ -1,0 +1,228 @@
+{
+  "name": "configuracion",
+  "version": 32,
+  "source-key": {
+    "type": "figma",
+    "file": "AFdA8RFxJr5tJTbLkkKJfi",
+    "node": "154:52",
+    "version": "5252058787",
+    "component-id": "d56ba49d6823d0dfc2b61d3d5eedbfc811303ec0"
+  },
+  "default": "Configuracion",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "vector",
+        "id": "Vector"
+      },
+      {
+        "type": "text",
+        "id": "Configuración"
+      },
+      {
+        "type": "text",
+        "id": "Cambiar idioma"
+      },
+      {
+        "type": "text",
+        "id": "Cerrar sesión"
+      },
+      {
+        "type": "text",
+        "id": "Eliminar cuenta"
+      }
+    ],
+    "modes": {
+      "Configuracion": {
+        "rules": [
+          {
+            "id": "top_level",
+            "padding": {
+              "left": "14.0",
+              "top": "11.0",
+              "right": "14.0",
+              "bottom": "11.0"
+            },
+            "main-axis-align": "start",
+            "cross-axis-align": "end",
+            "children": [
+              "Vector",
+              "Configuración",
+              "Cambiar idioma",
+              "Cerrar sesión",
+              "Eliminar cuenta"
+            ],
+            "item-spacing": "26.0",
+            "background-color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.4196078431372549"
+            }
+          },
+          {
+            "id": "Vector",
+            "tap-handler": "$atras",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "28.0"
+              }
+            },
+            "vector-content": "vector.svg"
+          },
+          {
+            "id": "Configuración",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "178.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "24.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "1.0"
+            },
+            "text-content": "Configuración",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "28.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          },
+          {
+            "id": "Cambiar idioma",
+            "tap-handler": "$cambiarIdioma",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "125.45453643798828"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "24.67866325378418"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Cambiar idioma",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "16.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          },
+          {
+            "id": "Cerrar sesión",
+            "tap-handler": "$cerrarSesion",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "109.09090423583984"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "16.19537353515625"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "0.0",
+              "value": "0.0"
+            },
+            "text-content": "Cerrar sesión",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align-vertical": "center",
+            "text-size": "16.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          },
+          {
+            "id": "Eliminar cuenta",
+            "tap-handler": "$eliminarCuenta",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": "116.0"
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": "17.0"
+              }
+            },
+            "color": {
+              "alpha": "1.0",
+              "hue": "0.0",
+              "saturation": "1.0",
+              "value": "1.0"
+            },
+            "text-content": "Eliminar cuenta",
+            "overflow": "visible",
+            "max-lines": "-1",
+            "text-align": "left",
+            "text-size": "16.0",
+            "line-height": "1.18701171875",
+            "typeface": "Kameron"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "atras": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "cambiarIdioma": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "cerrarSesion": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "eliminarCuenta": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Configuracion",
+      "size": {
+        "width": 230.0,
+        "height": 276.0
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
